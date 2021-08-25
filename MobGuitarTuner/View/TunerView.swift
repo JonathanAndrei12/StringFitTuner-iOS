@@ -22,11 +22,11 @@ struct TunerView: View {
             
             VStack(alignment: .leading) {
                 
-                Text("Frequency : \(tuner.data.pitch)")
+                Text("Frequency : \(tuner.frequencies, specifier: "%0.1f")")
                 
 //                Spacer()
                 
-                Text("Distance : \(tuner.minDistance)")
+                Text("Distance : \(tuner.minDistances)")
                 
                 Text("Note : \(tuner.data.noteNameWithSharps) / \(tuner.data.noteNameWithFlats)")
                 

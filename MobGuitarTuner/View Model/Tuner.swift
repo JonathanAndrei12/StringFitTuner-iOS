@@ -17,10 +17,16 @@ class Tuner: ObservableObject {
     let engine = AudioEngine()
     var mic: AudioEngine.InputNode
     var tracker: PitchTap!
+//    var tappableNode1: Fader
+//    var tappableNodeA: Fader
+//    var tappableNode2: Fader
+//    var tappableNodeB: Fader
+//    var tappableNode3: Fader
+//    var tappableNodeC: Fader
     var silence: Fader
     
-    @Published var minDistance: Float = 10_000.0
-    @Published var frequency: Float = 0.0
+    @Published var minDistances: Float = 10_000.0
+    @Published var frequencies: Float = 0.0
     
     @Published var data = TunerData()
     
@@ -29,7 +35,7 @@ class Tuner: ObservableObject {
         data.pitch = pitch
         data.amplitude = amp
         
-        frequency = pitch
+        var frequency = pitch
         
         while frequency > Float(data.noteFrequenciesList[data.noteFrequenciesList.count - 1]) {
             frequency /= 2.0
@@ -39,7 +45,9 @@ class Tuner: ObservableObject {
             frequency *= 2.0
         }
         
+        self.frequencies = frequency
         
+        var minDistance: Float = 10_000.0
         var index = 0
         
         for possibleIndex in 0 ..< data.noteFrequenciesList.count {
@@ -50,12 +58,13 @@ class Tuner: ObservableObject {
                 
                 index = possibleIndex
                 minDistance = distance
+                self.minDistances = distance
                 
             }
             
         }
         
-        let octave = Int(log2f(pitch/frequency))
+        let octave = Int(log2f(pitch / frequency))
         data.noteNameWithSharps = "\(data.noteNamesWithSharpsList[index])\(octave)"
         data.noteNameWithFlats = "\(data.noteNamesWithFlatsList[index])\(octave)"
         
@@ -77,7 +86,14 @@ class Tuner: ObservableObject {
         }
         
         mic = input
-        silence = Fader(mic, gain: 0)
+//        tappableNode1 = Fader(mic)
+//        tappableNode2 = Fader(tappableNode1)
+//        tappableNode3 = Fader(tappableNode2)
+//        tappableNodeA = Fader(tappableNode3)
+//        tappableNodeB = Fader(tappableNodeA)
+//        tappableNodeC = Fader(tappableNodeB)
+//        silence = Fader(tappableNodeC, gain: 0)
+        self.silence = Fader(mic, gain: 0)
         engine.output = silence
         
         tracker = PitchTap(mic) { pitch, amp in
