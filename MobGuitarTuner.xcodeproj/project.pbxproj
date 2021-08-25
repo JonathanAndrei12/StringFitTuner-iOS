@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,13 @@
 		DE292C5026D4E5B100E16355 /* MobGuitarTuner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DE292C4E26D4E5B100E16355 /* MobGuitarTuner.xcdatamodeld */; };
 		DE292C5B26D4E5B100E16355 /* MobGuitarTunerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE292C5A26D4E5B100E16355 /* MobGuitarTunerTests.swift */; };
 		DE292C6626D4E5B100E16355 /* MobGuitarTunerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE292C6526D4E5B100E16355 /* MobGuitarTunerUITests.swift */; };
+		DE292C7526D4E5CF00E16355 /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = DE292C7426D4E5CF00E16355 /* SoundpipeAudioKit */; };
+		DE292C7B26D4E63300E16355 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE292C7926D4E63300E16355 /* Note.swift */; };
+		DE292C7C26D4E63300E16355 /* Pitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE292C7A26D4E63300E16355 /* Pitch.swift */; };
+		DE292C7E26D4E64600E16355 /* Tuner.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE292C7D26D4E64600E16355 /* Tuner.swift */; };
+		DE292C8026D4E84E00E16355 /* TunerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE292C7F26D4E84E00E16355 /* TunerData.swift */; };
+		DE292C8226D4F6FC00E16355 /* TunerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE292C8126D4F6FC00E16355 /* TunerView.swift */; };
+		DE292C8426D4FFFE00E16355 /* ShowDevicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE292C8326D4FFFE00E16355 /* ShowDevicesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +56,12 @@
 		DE292C6126D4E5B100E16355 /* MobGuitarTunerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobGuitarTunerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE292C6526D4E5B100E16355 /* MobGuitarTunerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobGuitarTunerUITests.swift; sourceTree = "<group>"; };
 		DE292C6726D4E5B100E16355 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE292C7926D4E63300E16355 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		DE292C7A26D4E63300E16355 /* Pitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pitch.swift; sourceTree = "<group>"; };
+		DE292C7D26D4E64600E16355 /* Tuner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tuner.swift; sourceTree = "<group>"; };
+		DE292C7F26D4E84E00E16355 /* TunerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunerData.swift; sourceTree = "<group>"; };
+		DE292C8126D4F6FC00E16355 /* TunerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunerView.swift; sourceTree = "<group>"; };
+		DE292C8326D4FFFE00E16355 /* ShowDevicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDevicesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE292C7526D4E5CF00E16355 /* SoundpipeAudioKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +113,9 @@
 		DE292C4226D4E5B000E16355 /* MobGuitarTuner */ = {
 			isa = PBXGroup;
 			children = (
+				DE292C7826D4E62000E16355 /* Model */,
+				DE292C7726D4E61900E16355 /* View Model */,
+				DE292C7626D4E61200E16355 /* View */,
 				DE292C4326D4E5B000E16355 /* MobGuitarTunerApp.swift */,
 				DE292C4526D4E5B000E16355 /* ContentView.swift */,
 				DE292C4726D4E5B100E16355 /* Assets.xcassets */,
@@ -136,6 +153,33 @@
 			path = MobGuitarTunerUITests;
 			sourceTree = "<group>";
 		};
+		DE292C7626D4E61200E16355 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DE292C8126D4F6FC00E16355 /* TunerView.swift */,
+				DE292C8326D4FFFE00E16355 /* ShowDevicesView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DE292C7726D4E61900E16355 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				DE292C7D26D4E64600E16355 /* Tuner.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		DE292C7826D4E62000E16355 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DE292C7926D4E63300E16355 /* Note.swift */,
+				DE292C7A26D4E63300E16355 /* Pitch.swift */,
+				DE292C7F26D4E84E00E16355 /* TunerData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -152,6 +196,9 @@
 			dependencies = (
 			);
 			name = MobGuitarTuner;
+			packageProductDependencies = (
+				DE292C7426D4E5CF00E16355 /* SoundpipeAudioKit */,
+			);
 			productName = MobGuitarTuner;
 			productReference = DE292C4026D4E5B000E16355 /* MobGuitarTuner.app */;
 			productType = "com.apple.product-type.application";
@@ -223,6 +270,9 @@
 				Base,
 			);
 			mainGroup = DE292C3726D4E5B000E16355;
+			packageReferences = (
+				DE292C7326D4E5CF00E16355 /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */,
+			);
 			productRefGroup = DE292C4126D4E5B000E16355 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -265,8 +315,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE292C7C26D4E63300E16355 /* Pitch.swift in Sources */,
+				DE292C8426D4FFFE00E16355 /* ShowDevicesView.swift in Sources */,
+				DE292C7B26D4E63300E16355 /* Note.swift in Sources */,
+				DE292C8226D4F6FC00E16355 /* TunerView.swift in Sources */,
+				DE292C8026D4E84E00E16355 /* TunerData.swift in Sources */,
 				DE292C4D26D4E5B100E16355 /* Persistence.swift in Sources */,
 				DE292C4626D4E5B000E16355 /* ContentView.swift in Sources */,
+				DE292C7E26D4E64600E16355 /* Tuner.swift in Sources */,
 				DE292C4426D4E5B000E16355 /* MobGuitarTunerApp.swift in Sources */,
 				DE292C5026D4E5B100E16355 /* MobGuitarTuner.xcdatamodeld in Sources */,
 			);
@@ -588,6 +644,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DE292C7326D4E5CF00E16355 /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/SoundpipeAudioKit/";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DE292C7426D4E5CF00E16355 /* SoundpipeAudioKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DE292C7326D4E5CF00E16355 /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */;
+			productName = SoundpipeAudioKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		DE292C4E26D4E5B100E16355 /* MobGuitarTuner.xcdatamodeld */ = {
