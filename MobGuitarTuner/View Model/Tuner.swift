@@ -73,16 +73,21 @@ class Tuner: ObservableObject {
     init() {
 
         do {
+            
             // Configure settings of AVFoundation.
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.record, mode: AVAudioSession.Mode.measurement, options: [])
             try Settings.setSession(category: .playAndRecord, options: AVAudioSession.CategoryOptions.defaultToSpeaker.rawValue)
-
+            
         } catch let error {
+            
             print(error.localizedDescription)
+            
         }
         
         guard let input = engine.input else {
+            
             fatalError()
+            
         }
         
         mic = input
@@ -122,20 +127,3 @@ class Tuner: ObservableObject {
     }
     
 }
-//        do {
-//            // Configure settings of AVFoundation.
-//            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.record, mode: AVAudioSession.Mode.measurement, options: [])
-//        } catch let error {
-//            print(error.localizedDescription)
-//        }
-//
-//        Settings.enableLogging = true
-//
-//        mic = engine.input
-//        tracker = PitchTap(mic) { pitch, amp in
-//
-//            DispatchQueue.main.async {
-//                self.up
-//            }
-//
-//        }
