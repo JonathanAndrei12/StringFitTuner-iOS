@@ -16,7 +16,7 @@ struct ShowDevicesView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @StateObject var tuner: Tuner
+    @StateObject var noteTracker: NoteTracker
     @Binding var ShowDevices: Bool
     
     func getDevices() -> [Device] {
@@ -32,7 +32,7 @@ struct ShowDevicesView: View {
                 Spacer()
                 
                 ForEach(getDevices(), id: \.self) { device in
-                    Text(device == self.tuner.engine.inputDevice ? "* \(device.deviceID)" : "\(device.deviceID)").onTapGesture {
+                    Text(device == self.noteTracker.engine.inputDevice ? "* \(device.deviceID)" : "\(device.deviceID)").onTapGesture {
                         do {
                             try AudioEngine.setInputDevice(device)
                         } catch let err {
@@ -58,10 +58,10 @@ struct ShowDevicesView: View {
 
 struct ShowDevicesView_Previews: PreviewProvider {
     
-    @StateObject static var tuner = Tuner()
+    @StateObject static var noteTracker = NoteTracker()
     @State static var showDevices: Bool = true
     
     static var previews: some View {
-        ShowDevicesView(tuner: tuner, ShowDevices: $showDevices)
+        ShowDevicesView(noteTracker: noteTracker, ShowDevices: $showDevices)
     }
 }
