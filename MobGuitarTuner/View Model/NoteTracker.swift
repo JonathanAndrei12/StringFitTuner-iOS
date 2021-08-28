@@ -65,8 +65,9 @@ class NoteTracker: ObservableObject {
         }
         
         let octave = Int(log2f(pitch / frequency))
-        data.noteNameWithSharps = "\(data.noteNamesWithSharpsList[index])\(octave)"
-        data.noteNameWithFlats = "\(data.noteNamesWithFlatsList[index])\(octave)"
+        data.noteNameWithSharps = "\(data.noteNamesWithSharpsList[index])"
+        data.noteNameWithFlats = "\(data.noteNamesWithFlatsList[index])"
+        data.noteOctave = "\(octave)"
         
     }
     

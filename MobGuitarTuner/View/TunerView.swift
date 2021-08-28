@@ -13,10 +13,13 @@ import SwiftUI
 
 struct TunerView: View {
     
+    @Environment(\.presentationMode) var presentationMode
+    
     @StateObject var noteTracker: NoteTracker = NoteTracker()
     @StateObject var tuner: Tuner = Tuner()
     
     @State var showDevices: Bool = false
+    @State var showSettings: Bool = false
     @State var noteSelected: [Bool] = [true, false, false, false, false, false]
     @State var currentIndexSelected = 0
     @State var tuningStatus: String = "Good"
@@ -28,15 +31,28 @@ struct TunerView: View {
             
             VStack(alignment: .center) {
                 
+                HStack {
+                    HStack(alignment: .bottom, spacing: 0) {
+                        Text("\(noteTracker.data.noteNameWithSharps)")
+                            .font(.title)
+                        Text("\(noteTracker.data.noteOctave)")
+                    }
+                    
+                    Text("/")
+                        .font(.title)
+                    
+                    HStack(alignment: .bottom, spacing: 0) {
+                        Text("\(noteTracker.data.noteNameWithFlats)")
+                            .font(.title)
+                        Text("\(noteTracker.data.noteOctave)")
+                    }
+                }
+                
                 Text("Frequency : \(noteTracker.frequencies, specifier: "%0.1f") Hz")
+                    .font(.caption)
                 
                 Text("Distance : \(noteTracker.minDistances, specifier: "%0.1f") Hz")
-                
-                Text("Note : \(noteTracker.data.noteNameWithSharps) / \(noteTracker.data.noteNameWithFlats)")
-                
-                Button("\(noteTracker.engine.inputDevice?.deviceID ?? "Choose Mic")") {
-                    self.showDevices = true
-                }
+                    .font(.caption)
                 
                 Spacer()
                 
@@ -46,165 +62,148 @@ struct TunerView: View {
                 
                 Spacer()
                 
-                VStack(spacing: 0) {
-                    
-                    HStack(alignment: .center) {
-                        
-                        Button(action: {
-                            currentIndexSelected = 2
-                            for i in 0 ..< noteSelected.count {
-                                if i != currentIndexSelected {
-                                    noteSelected[i] = false
-                                } else {
-                                    noteSelected[i] = true
+                ZStack(alignment: .center) {
+                    Image("Guitar Neck Icon")
+                        .resizable()
+                        .frame(width: 250,height: 320)
+                    VStack(alignment: .center) {
+                        HStack(alignment: .center) {
+                            Button(action: {
+                                currentIndexSelected = 2
+                                for i in 0 ..< noteSelected.count {
+                                    if i != currentIndexSelected {
+                                        noteSelected[i] = false
+                                    } else {
+                                        noteSelected[i] = true
+                                    }
+                                }
+                            }) {
+                                ZStack(alignment: .center) {
+                                    Circle()
+                                        .foregroundColor(.gray)
+                                    Text(tuner.currentTuning[2])
+                                        .font(.title)
+                                        .foregroundColor(noteSelected[2] ?  .green : .white)
                                 }
                             }
-                        }){
-                            ZStack {
-                                Image("Guitar Dryer Icon")
-                                    .resizable()
-                                    .frame(width: 70, height: 100)
-                                    .rotationEffect(.degrees(-90.0))
-                                
-                                Text(tuner.currentTuning[2])
-                                    .font(.largeTitle)
-                                    .foregroundColor(noteSelected[2] ?  .green : .white)
-                                    .padding(.trailing, 15)
-                            }
-                        }
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            currentIndexSelected = 3
-                            for i in 0 ..< noteSelected.count {
-                                if i != currentIndexSelected {
-                                    noteSelected[i] = false
-                                } else {
-                                    noteSelected[i] = true
+                            .frame(width: 50,height: 50)
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                currentIndexSelected = 3
+                                for i in 0 ..< noteSelected.count {
+                                    if i != currentIndexSelected {
+                                        noteSelected[i] = false
+                                    } else {
+                                        noteSelected[i] = true
+                                    }
+                                }
+                            }) {
+                                ZStack(alignment: .center) {
+                                    Circle()
+                                        .foregroundColor(.gray)
+                                    Text(tuner.currentTuning[3])
+                                        .font(.title)
+                                        .foregroundColor(noteSelected[3] ?  .green : .white)
                                 }
                             }
-                        }){
-                            ZStack {
-                                Image("Guitar Dryer Icon")
-                                    .resizable()
-                                    .frame(width: 70, height: 100)
-                                    .rotationEffect(.degrees(90.0))
-                                
-                                Text(tuner.currentTuning[3])
-                                    .font(.largeTitle)
-                                    .foregroundColor(noteSelected[3] ?  .green : .white)
-                                    .padding(.leading, 15)
-                            }
+                            .frame(width: 50,height: 50)
                         }
+                        .padding(.horizontal, -60)
                         
+                        HStack(alignment: .center) {
+                            Button(action: {
+                                currentIndexSelected = 1
+                                for i in 0 ..< noteSelected.count {
+                                    if i != currentIndexSelected {
+                                        noteSelected[i] = false
+                                    } else {
+                                        noteSelected[i] = true
+                                    }
+                                }
+                            }) {
+                                ZStack(alignment: .center) {
+                                    Circle()
+                                        .foregroundColor(.gray)
+                                    Text(tuner.currentTuning[1])
+                                        .font(.title)
+                                        .foregroundColor(noteSelected[1] ?  .green : .white)
+                                }
+                            }
+                            .frame(width: 50,height: 50)
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                currentIndexSelected = 4
+                                for i in 0 ..< noteSelected.count {
+                                    if i != currentIndexSelected {
+                                        noteSelected[i] = false
+                                    } else {
+                                        noteSelected[i] = true
+                                    }
+                                }
+                            }) {
+                                ZStack(alignment: .center) {
+                                    Circle()
+                                        .foregroundColor(.gray)
+                                    Text(tuner.currentTuning[4])
+                                        .font(.title)
+                                        .foregroundColor(noteSelected[4] ?  .green : .white)
+                                }
+                            }
+                            .frame(width: 50,height: 50)
+                        }
+                        .padding(.horizontal, -50)
+                        .padding(.vertical, 5)
+                        
+                        HStack(alignment: .center) {
+                            Button(action: {
+                                currentIndexSelected = 0
+                                for i in 0 ..< noteSelected.count {
+                                    if i != currentIndexSelected {
+                                        noteSelected[i] = false
+                                    } else {
+                                        noteSelected[i] = true
+                                    }
+                                }
+                            }) {
+                                ZStack(alignment: .center) {
+                                    Circle()
+                                        .foregroundColor(.gray)
+                                    Text(tuner.currentTuning[0])
+                                        .font(.title)
+                                        .foregroundColor(noteSelected[0] ?  .green : .white)
+                                }
+                            }
+                            .frame(width: 50,height: 50)
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                currentIndexSelected = 5
+                                for i in 0 ..< noteSelected.count {
+                                    if i != currentIndexSelected {
+                                        noteSelected[i] = false
+                                    } else {
+                                        noteSelected[i] = true
+                                    }
+                                }
+                            }) {
+                                ZStack(alignment: .center) {
+                                    Circle()
+                                        .foregroundColor(.gray)
+                                    Text(tuner.currentTuning[5])
+                                        .font(.title)
+                                        .foregroundColor(noteSelected[5] ?  .green : .white)
+                                }
+                            }
+                            .frame(width: 50,height: 50)
+                        }
+                        .padding(.horizontal, -40)
                     }
-                    
-                    HStack(alignment: .center) {
-                        
-                        Button(action: {
-                            currentIndexSelected = 1
-                            for i in 0 ..< noteSelected.count {
-                                if i != currentIndexSelected {
-                                    noteSelected[i] = false
-                                } else {
-                                    noteSelected[i] = true
-                                }
-                            }
-                        }){
-                            ZStack {
-                                Image("Guitar Dryer Icon")
-                                    .resizable()
-                                    .frame(width: 70, height: 100)
-                                    .rotationEffect(.degrees(-90.0))
-                                
-                                Text(tuner.currentTuning[1])
-                                    .font(.largeTitle)
-                                    .foregroundColor(noteSelected[1] ?  .green : .white)
-                                    .padding(.trailing, 15)
-                            }
-                        }
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            currentIndexSelected = 4
-                            for i in 0 ..< noteSelected.count {
-                                if i != currentIndexSelected {
-                                    noteSelected[i] = false
-                                } else {
-                                    noteSelected[i] = true
-                                }
-                            }
-                        }){
-                            ZStack {
-                                Image("Guitar Dryer Icon")
-                                    .resizable()
-                                    .frame(width: 70, height: 100)
-                                    .rotationEffect(.degrees(90.0))
-                                
-                                Text(tuner.currentTuning[4])
-                                    .font(.largeTitle)
-                                    .foregroundColor(noteSelected[4] ?  .green : .white)
-                                    .padding(.leading, 15)
-                            }
-                        }
-                        
-                    }
-                    
-                    HStack(alignment: .center) {
-                        
-                        Button(action: {
-                            currentIndexSelected = 0
-                            for i in 0 ..< noteSelected.count {
-                                if i != currentIndexSelected {
-                                    noteSelected[i] = false
-                                } else {
-                                    noteSelected[i] = true
-                                }
-                            }
-                        }){
-                            ZStack {
-                                Image("Guitar Dryer Icon")
-                                    .resizable()
-                                    .frame(width: 70, height: 100)
-                                    .rotationEffect(.degrees(-90.0))
-                                    
-                                
-                                Text(tuner.currentTuning[0])
-                                    .font(.largeTitle)
-                                    .foregroundColor(noteSelected[0] ?  .green : .white)
-                                    .padding(.trailing, 15)
-                            }
-                        }
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            currentIndexSelected = 5
-                            for i in 0 ..< noteSelected.count {
-                                if i != currentIndexSelected {
-                                    noteSelected[i] = false
-                                } else {
-                                    noteSelected[i] = true
-                                }
-                            }
-                        }){
-                            ZStack {
-                                Image("Guitar Dryer Icon")
-                                    .resizable()
-                                    .frame(width: 70, height: 100)
-                                    .rotationEffect(.degrees(90.0))
-                                
-                                Text(tuner.currentTuning[5])
-                                    .font(.largeTitle)
-                                    .foregroundColor(noteSelected[5] ?  .green : .white)
-                                    .padding(.leading, 15)
-                            }
-                        }
-                        
-                    }
-                    
+                    .padding(.top, -60)
                 }
                 
             }
@@ -212,6 +211,16 @@ struct TunerView: View {
             .padding(.vertical, 100)
             
             .navigationBarTitle("Tuner", displayMode: .inline)
+            .navigationBarItems(leading: Button(action: {
+                showDevice()
+            }){
+                Image(systemName: "mic.fill")
+            },
+            trailing: Button(action: {
+                
+            }){
+                Image(systemName: "gearshape.fill")
+            })
             .onAppear() {
                 self.noteTracker.start()
             }
@@ -226,11 +235,17 @@ struct TunerView: View {
                     statusColor = .red
                 }
             })
-            .sheet(isPresented: $showDevices, content: {ShowDevicesView(noteTracker: self.noteTracker, ShowDevices: self.$showDevices)})
+            .sheet(isPresented: self.$showDevices, content: {ShowDevicesView(noteTracker: self.noteTracker, ShowDevices: self.$showDevices)})
             
         }
         
     }
+    
+    func showDevice() {
+        self.showDevices.toggle()
+        print(self.showDevices)
+    }
+    
 }
 
 struct TunerView_Previews: PreviewProvider {

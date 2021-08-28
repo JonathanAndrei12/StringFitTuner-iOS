@@ -46,9 +46,9 @@ class Tuner: ObservableObject {
             return "Good"
         } else {
             if distance < 0 {
-                return "To Low"
+                return "Too Low"
             } else if distance > 0 {
-                return "To High"
+                return "Too High"
             }
         }
         

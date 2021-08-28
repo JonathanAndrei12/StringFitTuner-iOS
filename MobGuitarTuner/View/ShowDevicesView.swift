@@ -25,43 +25,54 @@ struct ShowDevicesView: View {
     
     var body: some View {
         NavigationView{
-            VStack(spacing: 10) {
-                
-                Text("Double tap to select the microphone")
-                
-                Spacer()
-                
+            List {
                 ForEach(getDevices(), id: \.self) { device in
-                    Text(device == self.noteTracker.engine.inputDevice ? "* \(device.deviceID)" : "\(device.deviceID)").onTapGesture {
-                        do {
-                            try AudioEngine.setInputDevice(device)
-                        } catch let err {
-                            print(err)
+                    HStack {
+                        
+                        Text("\(device.deviceID)")
+                            .onTapGesture(perform: {
+                                do {
+                                    try AudioEngine.setInputDevice(device)
+                                } catch let err {
+                                    print(err)
+                                }
+                            })
+                        
+                        Spacer()
+                        
+                        if device == self.noteTracker.engine.inputDevice {
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.blue)
+                        } else {
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.clear)
                         }
                     }
-//                    .padding(.horizontal, 20)
                 }
-                
             }
-            .padding(.vertical, 300)
             .preferredColorScheme(.light)
             .navigationBarTitle("Microphone Selection", displayMode: .inline)
             .navigationBarItems(leading: Button(action:{
-//                self.ShowDevices.toggle()
-                self.presentationMode.wrappedValue.dismiss()
+                closeSheet()
             }){
                 Text("Close")
             })
+            .onDisappear(perform: {
+                self.ShowDevices = false
+                print(self.ShowDevices)
+            })
         }
+    }
+    func closeSheet() {
+        self.presentationMode.wrappedValue.dismiss()
     }
 }
 
 struct ShowDevicesView_Previews: PreviewProvider {
     
     @StateObject static var noteTracker = NoteTracker()
-    @State static var showDevices: Bool = true
     
     static var previews: some View {
-        ShowDevicesView(noteTracker: noteTracker, ShowDevices: $showDevices)
+        ShowDevicesView(noteTracker: noteTracker, ShowDevices: .constant(true))
     }
 }
